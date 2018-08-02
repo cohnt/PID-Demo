@@ -66,6 +66,28 @@
 			})(this)"></textarea></td>
 			<td>Description (TODO)</td>
 		</tr>
+		<tr>
+			<td>Goal Angle</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
+						parameters.goal = Math.PI * Number(elt.value) / 180;
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO) *note 0 deg to 360 deg</td>
+		</tr>
+		<tr>
+			<td>Initial Angle</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
+						parameters.initial = Math.PI * Number(elt.value) / 180;
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO) *note 0 deg to 360 deg</td>
+		</tr>
 	</tbody>
 </table>
 
