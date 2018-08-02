@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PID Demo</title>
+	<style>
+		th {
+			padding: 0px 8px;
+			text-align: left;
+		}
+		td {
+			padding: 2px 8px;
+		}
+		.narrowRows tr td {
+			padding: 0px 8px;
+		}
+	</style>
+</head>
+<body>
+
+<p>A PID Loop is a control feedback loop. "PID" stands for <em>Proportional</em>, <em>Integral</em>, and <em>Derivative</em> -- the three terms of the loop. With this website, you can simulate the effects of a PID loop on a motorized pendulum</p>
+
+<table>
+	<tbody class="narrowRows">
+		<tr>
+			<th>Parameter Name</th>
+			<th>Parameter Value</th>
+			<th>Description</th>
+		</tr>
+		<!-- <tr>
+			<td>Parameter</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				//
+			})(this)"></textarea></td>
+			<td>Description</td>
+		</tr> -->
+		<tr>
+			<td>P Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.P = Number(elt.value);
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>I Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0) {
+						parameters.I = Number(elt.value);
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>D Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0) {
+						parameters.D = Number(elt.value);
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+	</tbody>
+</table>
+
+<br><br>
+
+<canvas id="canvas" style="border: 1px dotted black; background-color: #eeeeee" width="500px" height="500px"></canvas>
+
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
