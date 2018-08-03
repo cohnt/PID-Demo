@@ -11,6 +11,7 @@ var parameters = {
 	weight: 1,
 	length: 100
 };
+var pendulumDisplayRadius = 20;
 
 ///////////////////////////////////////////
 /// GLOBAL VARIABLES
@@ -27,7 +28,27 @@ var pendulum;
 function Pendulum(angle, length, weight) {
 	this.angle = angle;
 	this.length = length;
-	this weight = weight;
+	this.weight = weight;
+
+	this.draw = function() {
+		var weightLoc = [250 + (this.length * Math.cos(this.angle)), 250 + (this.length * Math.sin(this.angle))];
+
+		ctx.beginPath();
+		ctx.moveTo(260, 250);
+		ctx.arc(250, 250, 10, 0, 2*Math.PI, true);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(250, 250);
+		ctx.lineTo(weightLoc[0], weightLoc[1]);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(weightLoc[0], weightLoc[1]);
+		ctx.arc(weightLoc[0], weightLoc[1], pendulumDisplayRadius, 0, 2*Math.PI, true);
+		ctx.closePath();
+		ctx.fill();
+	}
 }
 
 ///////////////////////////////////////////
