@@ -9,7 +9,7 @@ var parameters = {
 	initial: Math.PI * 3 / 4,
 	goal: 0,
 	weight: 1,
-	length: 100
+	length: 100 //In *centimeters*
 };
 var pendulumDisplayRadius = 20;
 
@@ -30,6 +30,9 @@ function Pendulum(angle, length, weight) {
 	this.length = length;
 	this.weight = weight;
 
+	this.vel = 0;
+	this.acl = 0;
+
 	this.draw = function() {
 		var weightLoc = [250 + (this.length * Math.cos(this.angle)), 250 + (this.length * Math.sin(this.angle))];
 
@@ -48,6 +51,13 @@ function Pendulum(angle, length, weight) {
 		ctx.arc(weightLoc[0], weightLoc[1], pendulumDisplayRadius, 0, 2*Math.PI, true);
 		ctx.closePath();
 		ctx.fill();
+	}
+	this.computeAcl = function() {
+		var gravAngle = Math.PI / 2;
+		var dAngle = gravAngle - this.angle;
+		var gravForce = 9.8 * this.weight;
+		var torque = this.length * (1/100) * gravForce * Math.sin(dAngle);
+		this.acl = torque / this.weight;
 	}
 }
 
