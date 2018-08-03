@@ -119,6 +119,8 @@ function setup() {
 
 	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
 	mc = new MotorController(parameters.P, parameters.I, parameters.D);
+
+	drawFrame();
 }
 
 function start() {
