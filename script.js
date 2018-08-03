@@ -93,6 +93,10 @@ function reset() {
 function drawFrame() {
 	//
 }
+function clearScreen() {
+	//
+	ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+}
 
 ///////////////////////////////////////////
 /// EXECUTED CODE
