@@ -59,6 +59,14 @@ function Pendulum(angle, length, weight) {
 		var torque = this.length * (1/100) * gravForce * Math.sin(dAngle);
 		this.acl = torque / this.weight;
 	}
+	this.updateVel = function(dt) {
+		//
+		this.vel += this.acl * dt;
+	}
+	this.updateAngle = function(dt) {
+		//
+		this.angle += this.vel * dt;
+	}
 }
 
 ///////////////////////////////////////////
