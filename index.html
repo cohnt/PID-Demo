@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PID Demo</title>
+	<style>
+		th {
+			padding: 0px 8px;
+			text-align: left;
+		}
+		td {
+			padding: 2px 8px;
+		}
+		.narrowRows tr td {
+			padding: 0px 8px;
+		}
+	</style>
+</head>
+<body>
+
+<p>A PID Loop is a control feedback loop. "PID" stands for <em>Proportional</em>, <em>Integral</em>, and <em>Derivative</em> -- the three terms of the loop. With this website, you can simulate the effects of a PID loop on a motorized pendulum</p>
+
+<table>
+	<tbody class="narrowRows">
+		<tr>
+			<th>Parameter Name</th>
+			<th>Parameter Value</th>
+			<th>Description</th>
+		</tr>
+		<!-- <tr>
+			<td>Parameter</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				//
+			})(this)"></textarea></td>
+			<td>Description</td>
+		</tr> -->
+		<tr>
+			<td>P Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.P = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)">5</textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>I Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0) {
+						parameters.I = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)">8</textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>D Term Gain</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0) {
+						parameters.D = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)">5</textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>Goal Angle</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
+						parameters.goal = Math.PI * Number(elt.value) / 180;
+						drawFrame();
+					}
+				}
+			})(this)">0</textarea></td>
+			<td>Description (TODO) *note 0 deg to 360 deg</td>
+		</tr>
+		<tr>
+			<td>Initial Angle</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
+						parameters.initial = Math.PI * Number(elt.value) / 180;
+						drawFrame();
+					}
+				}
+			})(this)">135</textarea></td>
+			<td>Description (TODO) *note 0 deg to 360 deg</td>
+		</tr>
+		<tr>
+			<td>Pendulum Weight</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.weight = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)">1</textarea></td>
+			<td>Description (TODO) (kg)</td>
+		</tr>
+		<tr>
+			<td>Pendulum Length</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.length = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)">100</textarea></td>
+			<td>Description (TODO) (cm)</td>
+		</tr>
+	</tbody>
+</table>
+
+<br><br>
+
+<div id="start" style="background-color: #00ff00; display: inline-block; padding: 10px 10px;">Start</div>
+<div id="stop" style="background-color: #ff0000; display: inline-block; padding: 10px 10px;">Stop</div>
+<div id="reset" style="background-color: #0000ff; display: inline-block; padding: 10px 10px;">Reset</div>
+
+<br><br>
+
+<canvas id="canvas" style="border: 1px dotted black; background-color: #eeeeee" width="500px" height="500px"></canvas>
+
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
