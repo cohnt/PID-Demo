@@ -39,6 +39,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) > 0) {
 						parameters.P = Number(elt.value);
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
@@ -50,6 +51,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) >= 0) {
 						parameters.I = Number(elt.value);
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
@@ -61,6 +63,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) >= 0) {
 						parameters.D = Number(elt.value);
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
@@ -72,6 +75,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
 						parameters.goal = Math.PI * Number(elt.value) / 180;
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
@@ -83,6 +87,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) >= 0 && Number(elt.value) < 360) {
 						parameters.initial = Math.PI * Number(elt.value) / 180;
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
@@ -94,6 +99,7 @@
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) > 0) {
 						parameters.initial = Number(elt.value);
+						drawFrame();
 					}
 				}
 			})(this)"></textarea></td>
