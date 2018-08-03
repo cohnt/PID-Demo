@@ -22,7 +22,7 @@ var ctx;
 var pendulum;
 var lastTime;
 var running = false;
-var stop = false;
+var stopRunning = false;
 
 ///////////////////////////////////////////
 /// CLASSES
@@ -81,6 +81,7 @@ function setup() {
 	ctx = canvas.getContext("2d");
 
 	document.getElementById("start").addEventListener("click", start);
+	document.getElementById("stop").addEventListener("click", stop);
 	document.getElementById("reset").addEventListener("click", reset);
 
 	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
@@ -91,12 +92,22 @@ function start() {
 		return;
 	}
 
+	running = true;
+
 	lastTime = window.performance.now();
 	requestAnimationFrame(tick);
 }
+function stop() {
+	if(running) {
+		stopRunning = true;
+	}
+}
 function reset() {
-	stop = true;
+	if(running) {
+		return;
+	}
 	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
+	drawFrame();
 }
 
 function drawFrame() {
@@ -109,9 +120,9 @@ function clearScreen() {
 }
 
 function tick() {
-	if(stop) {
+	if(stopRunning) {
 		running = false;
-		stop = false;
+		stopRunning = false;
 		return;
 	}
 
