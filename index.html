@@ -98,7 +98,19 @@
 			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
 				if(!isNaN(elt.value)) {
 					if(Number(elt.value) > 0) {
-						parameters.initial = Number(elt.value);
+						parameters.weight = Number(elt.value);
+						drawFrame();
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
+		<tr>
+			<td>Pendulum Length</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.length = Number(elt.value);
 						drawFrame();
 					}
 				}

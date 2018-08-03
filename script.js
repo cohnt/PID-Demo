@@ -8,7 +8,8 @@ var parameters = {
 	D: 1,
 	initial: Math.PI * 3 / 4,
 	goal: 0,
-	weight: 1
+	weight: 1,
+	length: 100
 };
 
 ///////////////////////////////////////////
@@ -17,12 +18,17 @@ var parameters = {
 
 var canvas;
 var ctx;
+var pendulum;
 
 ///////////////////////////////////////////
 /// CLASSES
 ///////////////////////////////////////////
 
-
+function Pendulum(angle, length, weight) {
+	this.angle = angle;
+	this.length = length;
+	this weight = weight;
+}
 
 ///////////////////////////////////////////
 /// FUNCTIONS
@@ -34,6 +40,8 @@ function setup() {
 
 	document.getElementById("start").addEventListener("click", start);
 	document.getElementById("reset").addEventListener("click", reset);
+
+	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
 }
 
 function start() {
