@@ -55,12 +55,12 @@ function Pendulum(angle, length, weight) {
 		ctx.closePath();
 		ctx.fill();
 	}
-	this.computeAcl = function() {
+	this.computeAcl = function(fApplied) {
 		var gravAngle = Math.PI / 2;
 		var dAngle = gravAngle - this.angle;
 		var gravForce = 9.8 * this.weight;
 		var torque = this.length * (1/100) * gravForce * Math.sin(dAngle);
-		this.acl = torque / this.weight;
+		this.acl = (torque / this.weight) + fApplied;
 	}
 	this.updateVel = function(dt) {
 		//
@@ -69,6 +69,39 @@ function Pendulum(angle, length, weight) {
 	this.updateAngle = function(dt) {
 		//
 		this.angle += this.vel * dt;
+	}
+}
+function MotorController(P, I, D) {
+	this.P = P;
+	this.I = I;
+	this.D = D;
+
+	this.eIntegral = 0;
+	this.eDerivative = 0;
+	this.lastE = 0;
+
+	this.output = function(error, dt) {
+		return this.pTerm(error) + this.iTerm(error, dt) + this.dTerm(error, dt);
+	}
+
+	this.pTerm = function(error) {
+		return this.P * error;
+	}
+	this.iTerm = function(error, dt) {
+		this.updateIntegral(error, dt);
+		return this.I * this.eIntegral;
+	}
+	this.dTerm = function(error, dt) {
+		this.updateDerivative(error, dt);
+		return this.D * this.eDerivative;
+	}
+
+	this.updateIntegral = function(error, dt) {
+		this.eIntegral += error * dt;
+	}
+	this.updateDerivative = function(error, dt) {
+		this.eDerivative = (error - this.lastE) / dt;
+		this.lastE = error;
 	}
 }
 
@@ -85,6 +118,7 @@ function setup() {
 	document.getElementById("reset").addEventListener("click", reset);
 
 	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
+	mc = new MotorController(parameters.P, parameters.I, parameters.D);
 }
 
 function start() {
@@ -107,6 +141,7 @@ function reset() {
 		return;
 	}
 	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
+	mc = new MotorController(parameters.P, parameters.I, parameters.D);
 	drawFrame();
 }
 
@@ -127,12 +162,14 @@ function tick() {
 	}
 
 	var t = window.performance.now();
-	var dt = t - lastTime;
+	var dt = (t - lastTime) / 1000; //ms to seconds
 	console.log("t: " + t + "\t\tdt: " + dt);
 
-	pendulum.computeAcl();
-	pendulum.updateVel(dt / 1000);
-	pendulum.updateAngle(dt / 1000);
+	var error = parameters.goal - pendulum.angle;
+
+	pendulum.computeAcl(mc.output(error, dt));
+	pendulum.updateVel(dt);
+	pendulum.updateAngle(dt);
 
 	console.log(pendulum.acl);
 	console.log(pendulum.vel);
