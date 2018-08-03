@@ -88,6 +88,17 @@
 			})(this)"></textarea></td>
 			<td>Description (TODO) *note 0 deg to 360 deg</td>
 		</tr>
+		<tr>
+			<td>Pendulum Weight</td>
+			<td><textarea class="parameterForm" cols="5" rows="1" onkeyup="(function(elt){
+				if(!isNaN(elt.value)) {
+					if(Number(elt.value) > 0) {
+						parameters.initial = Number(elt.value);
+					}
+				}
+			})(this)"></textarea></td>
+			<td>Description (TODO)</td>
+		</tr>
 	</tbody>
 </table>
 
