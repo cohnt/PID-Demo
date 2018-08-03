@@ -3,9 +3,9 @@
 ///////////////////////////////////////////
 
 var parameters = {
-	P: 3,
-	I: 3,
-	D: 3,
+	P: 5,
+	I: 8,
+	D: 5,
 	initial: Math.PI * 3 / 4,
 	goal: 0,
 	weight: 1,
