@@ -15,7 +15,8 @@ var parameters = {
 /// GLOBAL VARIABLES
 ///////////////////////////////////////////
 
-
+var canvas;
+var ctx;
 
 ///////////////////////////////////////////
 /// CLASSES
@@ -28,6 +29,17 @@ var parameters = {
 ///////////////////////////////////////////
 
 function setup() {
+	canvas = document.getElementById("canvas");
+	ctx = canvas.getContext("2d");
+
+	document.getElementById("start").addEventListener("click", start);
+	document.getElementById("reset").addEventListener("click", reset);
+}
+
+function start() {
+	//
+}
+function reset() {
 	//
 }
 
