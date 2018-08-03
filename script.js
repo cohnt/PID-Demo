@@ -20,6 +20,9 @@ var pendulumDisplayRadius = 20;
 var canvas;
 var ctx;
 var pendulum;
+var lastTime;
+var running = false;
+var stop = false;
 
 ///////////////////////////////////////////
 /// CLASSES
@@ -84,18 +87,51 @@ function setup() {
 }
 
 function start() {
-	//
+	if(running) {
+		return;
+	}
+
+	lastTime = window.performance.now();
+	requestAnimationFrame(tick);
 }
 function reset() {
-	//
+	stop = true;
+	pendulum = new Pendulum(parameters.initial, parameters.length, parameters.weight);
 }
 
 function drawFrame() {
-	//
+	clearScreen();
+	pendulum.draw();
 }
 function clearScreen() {
 	//
-	ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+	ctx.clearRect(0, 0, 500, 500);
+}
+
+function tick() {
+	if(stop) {
+		running = false;
+		stop = false;
+		return;
+	}
+
+	var t = window.performance.now();
+	var dt = t - lastTime;
+	console.log("t: " + t + "\t\tdt: " + dt);
+
+	pendulum.computeAcl();
+	pendulum.updateVel(dt / 1000);
+	pendulum.updateAngle(dt / 1000);
+
+	console.log(pendulum.acl);
+	console.log(pendulum.vel);
+	console.log(pendulum.angle);
+	console.log("");
+
+	drawFrame();
+
+	lastTime = t;
+	requestAnimationFrame(tick);
 }
 
 ///////////////////////////////////////////
